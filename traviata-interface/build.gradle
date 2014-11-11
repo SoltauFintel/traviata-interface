@@ -1,5 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+version = '0.1.3'
+group = 'mwvb.traviata'
+archivesBaseName = 'traviata-interface'
 
 sourceCompatibility = 1.7
 
@@ -15,4 +21,64 @@ repositories {
 dependencies {
     compile 'dom4j:dom4j:1.6.1'
     compile 'jaxen:jaxen:1.1.4'
+	testCompile 'junit:junit:4.11'
+}
+
+task javadocJar(type: Jar) {
+	classifier = 'javadoc'
+	from javadoc
+}
+
+task sourcesJar(type: Jar) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives javadocJar, sourcesJar
+}
+
+// S.58
+signing {
+	sign configurations.archives
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+				authentication(userName: ossrhUsername, password: ossrhPassword)
+			}
+			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+				authentication(userName: ossrhUsername, password: ossrhPassword)
+			}
+			pom.project {
+				name 'traviata-interface'
+				packaging 'jar'
+				description 'public interface for test applications'
+				url 'https://github.com/traviatasoftware/traviata-interface'
+				
+				scm {
+					connection 'https://github.com/traviatasoftware/traviata-interface'
+					developerConnection 'https://github.com/traviatasoftware/traviata-interface'
+					url 'https://github.com/traviatasoftware/traviata-interface'
+				}
+		  
+				licenses {
+					license {
+						name '(c) Marcus Warm'
+						url 'http://mwvb.de'
+					}
+				}
+				
+				developers {
+					developer {
+					  name 'Marcus Warm'
+					  email 'juni@mwvb.de'
+					}
+				  }
+			}
+		}
+	}
 }

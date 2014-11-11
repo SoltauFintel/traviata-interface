@@ -11,5 +11,11 @@
 			<arg value="eclipse"/>
 		</exec>
 	</target>
+	<target name="upload to MavenCentral">
+		<exec executable="${gradlebat}">
+			<arg value="build"/>
+			<arg value="uploadArchives"/>
+		</exec>
+	</target>
 	
 </project>
