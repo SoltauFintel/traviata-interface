@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+
+sourceSets {
+	main.java.srcDir 'src'
+	main.resources.srcDir 'src'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    compile 'dom4j:dom4j:1.6.1'
+    compile 'jaxen:jaxen:1.1.4'
+}

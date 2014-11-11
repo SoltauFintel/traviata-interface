@@ -1,0 +1,7 @@
+/bin
+/.gradle
+/build
+/generated
+/velocity.log
+/log
+/temp.xml

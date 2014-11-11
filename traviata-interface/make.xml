@@ -1,0 +1,15 @@
+<project name="traviata-interface" basedir="." default="build">
+	<property name="gradlebat" value="gradlew.bat"/>
+
+	<target name="build">
+		<exec executable="${gradlebat}">
+			<arg value="build"/>
+		</exec>
+	</target>
+	<target name="eclipse">
+		<exec executable="${gradlebat}">
+			<arg value="eclipse"/>
+		</exec>
+	</target>
+	
+</project>
