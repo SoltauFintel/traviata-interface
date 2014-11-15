@@ -3,11 +3,11 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = '0.1.3'
+version = '0.2.0'
 group = 'mwvb.traviata'
 archivesBaseName = 'traviata-interface'
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.6
 
 sourceSets {
 	main.java.srcDir 'src'

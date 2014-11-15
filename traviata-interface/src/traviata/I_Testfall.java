@@ -75,9 +75,14 @@ public interface I_Testfall {
 	String getConsoleOutput();
 
 	/**
-	 * @return VTScript
+	 * @return Script
 	 */
-	String getVTScript();
+	String getScript();
+	
+	/**
+	 * @return Dateiname der Scriptdatei
+	 */
+	String getScriptDateiname();
 	
 	/**
 	 * @return Produktname
