@@ -80,9 +80,9 @@ public interface I_Testfall {
 	String getScript();
 	
 	/**
-	 * @return Dateiname der Scriptdatei
+	 * @return Scriptname
 	 */
-	String getScriptDateiname();
+	String getScriptname();
 	
 	/**
 	 * @return Produktname
