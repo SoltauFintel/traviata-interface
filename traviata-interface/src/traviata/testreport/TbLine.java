@@ -1,23 +1,23 @@
-package traviata.testbericht;
+package traviata.testreport;
 
 import java.io.Serializable;
 
 import traviata.base.xml.XMLElement;
-import traviata.testbericht.TbZeile;
+import traviata.testreport.TbLine;
 
-public class TbZeile implements TbActionItem, Serializable {
+public class TbLine implements TbActionItem, Serializable {
 	private String label;
 	private String text;
 	
-	public TbZeile() {
+	public TbLine() {
 	}
 
-	public TbZeile(String label, String text) {
+	public TbLine(String label, String text) {
 		this.label = label;
 		this.text = text;
 	}
 
-	public TbZeile(XMLElement e) {
+	public TbLine(XMLElement e) {
 		label = e.getValue("label");
 		text = e.getText();
 	}
@@ -44,7 +44,7 @@ public class TbZeile implements TbActionItem, Serializable {
 
 	@Override
 	public void appendTo(XMLElement parent) {
-		XMLElement e = parent.add("Zeile");
+		XMLElement e = parent.add("Line");
 		e.setValue("label", label);
 		e.setText(text);
 	}

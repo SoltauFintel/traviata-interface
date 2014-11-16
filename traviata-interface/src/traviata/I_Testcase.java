@@ -1,13 +1,13 @@
 package traviata;
 
-import traviata.testbericht.TbTestfall;
+import traviata.testreport.TbTestcase;
 
-public interface I_Testfall {
+public interface I_Testcase {
 	/** INTERN */
-	int NORMALE_PRIORITAET = 90;
+	int NORMAL_PRIORITY = 90;
 
 	/**
-	 * @return 6stellige Testfall Id
+	 * @return 6 digit testcase id
 	 */
 	String getId();
 
@@ -16,35 +16,35 @@ public interface I_Testfall {
 	 * <p>Liefert standardmäßig NORMALE_PRIORITAET.
 	 * @return desto kleiner die Zahl desto höher die Priorität
 	 */
-	int getPrioritaet();
+	int getPriority();
 
 	/**
 	 * der wievielte Testfall innerhalb der Gruppe
 	 * @return Wert ab 1
 	 */
-	int getOrdnungsnummer();
+	int getOrderNumber();
 
 	/**
 	 * @return Titel der Testfall-Gruppe
 	 */
-	String getGruppe();
+	String getGroup();
 
 	/**
 	 * @return Testfall Titel
 	 */
-	String getTitel();
+	String getTitle();
 
 	/**
 	 * Weist dem Testfall einen Ordner zu, in dem dieser Dateien ablegen darf.
 	 * @param path Der Ordner wird ggf. angelegt. Muss mit Pfadtrennzeichen enden.
 	 * @throws IllegalArgumentException wenn path leer oder null
 	 */
-	void setPfad(String path);
+	void setPath(String path);
 	
 	/**
 	 * @return Pfad
 	 */
-	String getPfad();
+	String getPath();
 
 	/**
 	 * Testfall ausführen
@@ -57,17 +57,17 @@ public interface I_Testfall {
 	 * false wenn Testfall nicht fachlich erfolgreich war,
 	 * null wenn Testfall noch nicht ausgeführt worden ist
 	 */
-	Boolean fachlichErfolgreich();
+	Boolean successfully();
 
 	/**
-	 * @return Testbericht
+	 * @return test case report
 	 */
-	TbTestfall getTestbericht();
+	TbTestcase getTestreport();
 	
 	/**
-	 * @return kompakte Fehlermeldung (für unique-Bestimmung)
+	 * @return compact error message (for unique determination)
 	 */
-	String getFehlermeldung();
+	String getErrorMessage();
 
 	/**
 	 * @return Console output
@@ -80,22 +80,22 @@ public interface I_Testfall {
 	String getScript();
 	
 	/**
-	 * @return Scriptname
+	 * @return Script name
 	 */
 	String getScriptname();
 	
 	/**
 	 * @return Produktname
 	 */
-	String getProdukt();
+	String getClassification();
 	
 	/**
 	 * @return mehrzeilige Versionsangaben
 	 */
-	String getVersionsangaben();
+	String getVersionInformation();
 	
 	/**
 	 * @return true wenn Testfall abgebrochen worden ist
 	 */
-	boolean isAbgebrochen();
+	boolean isAborted();
 }

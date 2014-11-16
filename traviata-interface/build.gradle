@@ -1,9 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
-apply plugin: 'signing'
 
-version = '0.2.1'
+version = '0.2.2'
 group = 'mwvb.traviata'
 archivesBaseName = 'traviata-interface'
 
@@ -38,7 +36,10 @@ artifacts {
 	archives javadocJar, sourcesJar
 }
 
-// S.58
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+// page 58
 signing {
 	sign configurations.archives
 }

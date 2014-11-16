@@ -1,4 +1,4 @@
-package traviata.testbericht;
+package traviata.testreport;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,30 +8,30 @@ import java.util.List;
 import traviata.base.xml.XMLElement;
 
 /**
- * Meist Geschäftsprozss
+ * An action is usually a business process.
  */
 public class TbAction implements Serializable {
-	private String titel;
-	private java.util.Date startzeit;
+	private String title;
+	private java.util.Date starttime;
 	private final List<TbActionItem> items = new ArrayList<TbActionItem>();
 	
 	public TbAction() {
 	}
 	
 	public TbAction(XMLElement ea) {
-		titel = ea.getValue("titel");
-		startzeit = TbService.toDate(ea, "startzeit");
+		title = ea.getValue("title");
+		starttime = TbService.toDate(ea, "starttime");
 		for (XMLElement e : ea.getChildren()) {
 			TbActionItem item;
 			String n = e.getName();
-			if ("Zeile".equals(n)) {
-				item = new TbZeile(e);
+			if ("Line".equals(n)) {
+				item = new TbLine(e);
 			} else if ("Block".equals(n)) {
 				item = new TbBlock(e);
-			} else if ("Fehlermeldung".equals(n)) {
-				item = new TbFehlermeldung(e);
-			} else if ("Tabelle".equals(n)) {
-				item = new TbTabelle(e);
+			} else if ("ErrorMessage".equals(n)) {
+				item = new TbErrorMessage(e);
+			} else if ("Table".equals(n)) {
+				item = new TbTable(e);
 			} else {
 				throw new RuntimeException("Unbekannter Item: " + n);
 			}
@@ -39,30 +39,30 @@ public class TbAction implements Serializable {
 		}
 	}
 	
-	public String getTitel() {
-		return titel;
+	public String getTitle() {
+		return title;
 	}
 
-	public Date getStartzeit() {
-		return startzeit;
+	public Date getStarttime() {
+		return starttime;
 	}
 
 	public List<TbActionItem> getItems() {
 		return items;
 	}
 
-	public void setTitel(String titel) {
-		this.titel = titel;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setStartzeit(java.util.Date startzeit) {
-		this.startzeit = startzeit;
+	public void setStarttime(java.util.Date starttime) {
+		this.starttime = starttime;
 	}
 	
 	public void appendTo(XMLElement parent) {
 		XMLElement e = parent.add("Action");
-		e.setValue("titel", titel);
-		if (startzeit != null) e.setValue("startzeit", TbService.format(startzeit));
+		e.setValue("title", title);
+		if (starttime != null) e.setValue("starttime", TbService.format(starttime));
 		for (TbActionItem item : items) {
 			item.appendTo(e);
 		}

@@ -1,4 +1,4 @@
-package traviata.testbericht;
+package traviata.testreport;
 
 import traviata.base.xml.XMLElement;
 

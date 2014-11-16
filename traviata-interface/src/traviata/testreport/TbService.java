@@ -1,4 +1,4 @@
-package traviata.testbericht;
+package traviata.testreport;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,8 +18,8 @@ public class TbService {
 		return ret.substring(ret.length() - 6);
 	}
 
-	public static String format(java.util.Date datumUhrzeit) {
-		return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(datumUhrzeit);
+	public static String format(java.util.Date dateTime) {
+		return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(dateTime);
 	}
 	
 	public static int toInt(XMLElement e, String feldname) {
@@ -34,7 +34,7 @@ public class TbService {
 		try {
 			return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").parse(i);
 		} catch (ParseException e1) {
-			throw new RuntimeException("Fehler beim Parsen von: " + i, e1);
+			throw new RuntimeException("Error parsing: " + i, e1);
 		}
 	}
 }
