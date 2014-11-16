@@ -4,7 +4,7 @@ public interface I_Worker {
 
 	void before();
 	
-	void after();
+	void after(boolean success);
 	
 	void afterAll();
 }
