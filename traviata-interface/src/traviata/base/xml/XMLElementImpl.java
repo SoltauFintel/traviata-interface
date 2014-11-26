@@ -15,7 +15,7 @@ import org.dom4j.Node;
 
 /**
  * XML Element
- * <br>XML Kapselung für vereinfachten DOM-basierten XML-Zugriff
+ * <br>XML Kapselung fuer vereinfachten DOM-basierten XML-Zugriff
  */
 public class XMLElementImpl implements XMLElement {
 	protected Element element;
@@ -119,7 +119,7 @@ public class XMLElementImpl implements XMLElement {
 	/**
 	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
 	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
-	 * 			                   dass nur Elemente zurückgegeben werden.
+	 * 			                   dass nur Elemente zurueckgegeben werden.
 	 * @return XMLElement Liste
 	 */
 	@Override
@@ -130,7 +130,7 @@ public class XMLElementImpl implements XMLElement {
 	/**
 	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
 	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
-	 * 			                   dass nur ein Element zurückgegeben wird.
+	 * 			                   dass nur ein Element zurueckgegeben wird.
 	 * @return XMLElement oder null wenn Element nicht gefunden
 	 */
 	@Override
@@ -213,7 +213,7 @@ public class XMLElementImpl implements XMLElement {
 	
 	/**
 	 * Alle direkten Kindelemente anhand Elementnamen loeschen
-	 * @param pElementName streng genommen XPath Anweisung für selectNodes
+	 * @param pElementName streng genommen XPath Anweisung fuer selectNodes
 	 */
 	@Override
 	public void removeChildren(String pElementName) {
@@ -224,7 +224,7 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	/**
-	 * @param pBeforeIndex Index vor dem das neue Element eingefügt werden soll
+	 * @param pBeforeIndex Index vor dem das neue Element eingefuegt werden soll
 	 * @param pNewElementName neuer Elementname
 	 * @return neues Element
 	 */
