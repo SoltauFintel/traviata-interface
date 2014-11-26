@@ -1,2 +1,2 @@
 language: java
-script: ./gradle build.gradle
+before_script: ./gradle build.gradle
