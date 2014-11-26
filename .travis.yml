@@ -1,2 +1,16 @@
 language: java
-script: ./traviata-interface/gradlew ./traviata-interface/build.gradle
+
+jdk:
+ - oraclejdk7
+branches:
+ only:
+ - master
+
+env:  
+  global:  
+  - TERM=dumb
+  
+before_script:
+ - chmod +x ./traviata-interface/gradlew
+
+script: gradle -b ./traviata-interface/build.gradle --no-color --stacktrace build
