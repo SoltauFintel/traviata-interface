@@ -36,6 +36,7 @@ artifacts {
 	archives javadocJar, sourcesJar
 }
 
+/*
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -83,3 +84,4 @@ uploadArchives {
 		}
 	}
 }
+*/
