@@ -69,17 +69,17 @@ public interface XMLElement {
 	String getXML();
 
 	/**
-	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgelöst.
-	 * @param pXPath XPath String. Der XPath String muß so aufgebaut sein,
-	 * 			                   daß nur Elemente zurückgegeben werden.
+	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
+	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
+	 * 			                   dass nur Elemente zurueckgegeben werden.
 	 * @return XMLElement Liste
 	 */
 	List<XMLElement> selectNodes(String pXPath);
 
 	/**
-	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgelöst.
-	 * @param pXPath XPath String. Der XPath String muß so aufgebaut sein,
-	 * 			                   daß nur ein Element zurückgegeben wird.
+	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
+	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
+	 * 			                   dass nur ein Element zurueckgegeben wird.
 	 * @return XMLElement oder null wenn Element nicht gefunden
 	 */
 	XMLElement selectSingleNode(String pXPath);
@@ -109,26 +109,26 @@ public interface XMLElement {
 
 	/**
 	 * Diese Methode macht aus allen Attributen eine Map.
-	 * Die Reihenfolge wird nicht gewährleistet.
-	 * Innerer Text und Kindelemente werden nicht berücksichtigt.
+	 * Die Reihenfolge wird nicht gewaehrleistet.
+	 * Innerer Text und Kindelemente werden nicht beruecksichtigt.
 	 * @return Map Key: Attributname [String], Value: Attributinhalt [String]
 	 */
 	Map<String, String> getMap();
 	
 	/**
-	 * XML String als Kind an dieses Element anhängen
+	 * XML String als Kind an dieses Element anhaengen
 	 * @param pXML XML String
 	 */
 	void append(String pXML);
 
 	/**
-	 * Alle direkten Kindelemente anhand Elementnamen löschen
-	 * @param pElementName streng genommen XPath Anweisung für selectNodes
+	 * Alle direkten Kindelemente anhand Elementnamen loeschen
+	 * @param pElementName streng genommen XPath Anweisung fuer selectNodes
 	 */
 	void removeChildren(String pElementName);
 
 	/**
-	 * @param pBeforeIndex Index vor dem das neue Element eingefügt werden soll
+	 * @param pBeforeIndex Index vor dem das neue Element eingefuegt werden soll
 	 * @param pNewElementName neuer Elementname
 	 * @return neues Element
 	 */
@@ -164,7 +164,7 @@ public interface XMLElement {
 	boolean hasAttribute(String pAttributname);
 	
 	/**
-	 * Löscht leere Attribute
+	 * Loescht leere Attribute
 	 */
 	void removeEmptyAttributes();
 

@@ -13,8 +13,8 @@ public interface I_Testcase {
 
 	/**
 	 * INTERN
-	 * <p>Liefert standardmäßig NORMALE_PRIORITAET.
-	 * @return desto kleiner die Zahl desto höher die Priorität
+	 * <p>Liefert standardmÃ¤ÃŸig NORMALE_PRIORITAET.
+	 * @return desto kleiner die Zahl desto hÃ¶her die PrioritÃ¤t
 	 */
 	int getPriority();
 
@@ -47,7 +47,7 @@ public interface I_Testcase {
 	String getPath();
 
 	/**
-	 * Testfall ausführen
+	 * Testfall ausfÃ¼hren
 	 * @throws RuntimeException wenn setPfad() vorher nicht aufgerufen wurde
 	 */
 	void start();
@@ -55,7 +55,7 @@ public interface I_Testcase {
 	/**
 	 * @return true wenn Testfall fachlich erfolgreich war,
 	 * false wenn Testfall nicht fachlich erfolgreich war,
-	 * null wenn Testfall noch nicht ausgeführt worden ist
+	 * null wenn Testfall noch nicht ausgefÃ¼hrt worden ist
 	 */
 	Boolean successfully();
 

@@ -17,7 +17,7 @@ import org.dom4j.io.XMLWriter;
 
 /**
  * XML Dokument
- * <br>XML Kapselung für vereinfachten DOM-basierten XML-Zugriff
+ * <br>XML Kapselung fuer vereinfachten DOM-basierten XML-Zugriff
  */
 public class XMLDocument implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -187,7 +187,7 @@ public class XMLDocument implements Serializable {
 	}
 
 	/**
-	 * @return true wenn Dokument gültig und das root-Element Kind-Elemente besitzt
+	 * @return true wenn Dokument gueltig und das root-Element Kind-Elemente besitzt
 	 */
 	public boolean isOkay() {
 		return dok!=null
@@ -213,7 +213,7 @@ public class XMLDocument implements Serializable {
 	
 	/**
 	 * selectNodes Zugriff auf Dokumentebene <br>
-	 * Es wird eine Exception ausgelöst wenn die XPath-Anweisung fehlerhaft ist.
+	 * Es wird eine Exception ausgeloest wenn die XPath-Anweisung fehlerhaft ist.
 	 * @param pXPath XPath String
 	 * @return XMLElement Liste
 	 */
@@ -223,9 +223,9 @@ public class XMLDocument implements Serializable {
 	
 	/**
 	 * selectSingleNode Zugriff auf Dokumentebene <br>
-	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgelöst.
-	 * @param pXPath XPath String. Der XPath String muß so aufgebaut sein,
-	 * 			                   daß nur ein Element zurückgegeben wird.
+	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
+	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
+	 * 			                   dass nur ein Element zurueckgegeben wird.
 	 * @return XMLElement oder null wenn Element nicht gefunden
 	 */
 	public XMLElement selectSingleNode(String pXPath) {
@@ -247,11 +247,11 @@ public class XMLDocument implements Serializable {
 	}
 	
 	/**
-	 * Element mit Attribut "id" = id löschen.
+	 * Element mit Attribut "id" = id loeschen.
 	 * Element kann nicht das root Element sein. Es muss aber auch nicht
 	 * das direkte Kindelement des root Elements sein.
 	 * @param id Inhalt des Attributs "id"
-	 * @return true wenn child gelöscht worden ist,
+	 * @return true wenn child geloescht worden ist,
 	 * false wenn child nicht gefunden worden ist
 	 */
 	public boolean removeChildById(final String id) {

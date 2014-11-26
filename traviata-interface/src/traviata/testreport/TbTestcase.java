@@ -86,7 +86,7 @@ public class TbTestcase implements Serializable {
 	}
 
 	/**
-	 * @return meist Geschäftsprozesse
+	 * @return meist Geschaeftsprozesse
 	 */
 	public List<TbAction> getActions() {
 		return actions;

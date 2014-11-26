@@ -117,7 +117,7 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	/**
-	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgelöst.
+	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
 	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
 	 * 			                   dass nur Elemente zurückgegeben werden.
 	 * @return XMLElement Liste
@@ -128,7 +128,7 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	/**
-	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgelöst.
+	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
 	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
 	 * 			                   dass nur ein Element zurückgegeben wird.
 	 * @return XMLElement oder null wenn Element nicht gefunden
@@ -198,7 +198,7 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	/**
-	 * XML String als Kind an dieses Element anhängen
+	 * XML String als Kind an dieses Element anhaengen
 	 * @param pXML XML String
 	 */
 	@Override
@@ -212,7 +212,7 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	/**
-	 * Alle direkten Kindelemente anhand Elementnamen löschen
+	 * Alle direkten Kindelemente anhand Elementnamen loeschen
 	 * @param pElementName streng genommen XPath Anweisung für selectNodes
 	 */
 	@Override
