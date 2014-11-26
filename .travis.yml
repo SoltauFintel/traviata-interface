@@ -1,2 +1,2 @@
 language: java
-before_script: ./gradle build.gradle
+script: ./traviata-interface/gradlew ./traviata-interface/build.gradle
