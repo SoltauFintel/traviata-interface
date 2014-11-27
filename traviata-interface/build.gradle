@@ -50,6 +50,7 @@ uploadArchives {
 		mavenDeployer {
 			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+				// gradle.properties in users/.gradle dir ! 
 				authentication(userName: ossrhUsername, password: ossrhPassword)
 			}
 			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
@@ -70,16 +71,16 @@ uploadArchives {
 				licenses {
 					license {
 						name '(c) Marcus Warm'
-						url 'http://mwvb.de'
+						url  'http://mwvb.de'
 					}
 				}
 				
 				developers {
 					developer {
-					  name 'Marcus Warm'
-					  email 'juni@mwvb.de'
+						name  'Marcus Warm'
+						email 'juni@mwvb.de'
 					}
-				  }
+				}
 			}
 		}
 	}
