@@ -22,7 +22,6 @@ dependencies {
 	testCompile 'junit:junit:4.11'
 }
 
-/*
 task javadocJar(type: Jar) {
 	classifier = 'javadoc'
 	from javadoc
@@ -37,6 +36,7 @@ artifacts {
 	archives javadocJar, sourcesJar
 }
 
+/*
 apply plugin: 'maven'
 apply plugin: 'signing'
 
