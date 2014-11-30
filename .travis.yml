@@ -1,7 +1,5 @@
 language: java
 
-install: true
-
 env:  
   global:  
   - TERM=dumb
