@@ -22,6 +22,10 @@ dependencies {
 	testCompile 'junit:junit:4.11'
 }
 
+// http://central.sonatype.org/pages/gradle.html
+apply plugin: 'maven'
+apply plugin: 'signing'
+
 task javadocJar(type: Jar) {
 	classifier = 'javadoc'
 	from javadoc
@@ -36,11 +40,6 @@ artifacts {
 	archives javadocJar, sourcesJar
 }
 
-/*
-apply plugin: 'maven'
-apply plugin: 'signing'
-
-// page 58
 signing {
 	sign configurations.archives
 }
@@ -59,8 +58,8 @@ uploadArchives {
 			pom.project {
 				name 'traviata-interface'
 				packaging 'jar'
-				description 'public interface for test applications'
-				url 'https://github.com/traviatasoftware/traviata-interface'
+				description 'Public interface for Traviata test applications'
+				url 'https://github.com/traviatasoftware/traviata-interface/blob/master/README.md'
 				
 				scm {
 					connection 'https://github.com/traviatasoftware/traviata-interface'
@@ -71,12 +70,13 @@ uploadArchives {
 				licenses {
 					license {
 						name '(c) Marcus Warm'
-						url  'http://mwvb.de'
+						url  'https://github.com/traviatasoftware/traviata-interface/blob/master/README.md'
 					}
 				}
 				
 				developers {
 					developer {
+						id 'traviatasoftware'
 						name  'Marcus Warm'
 						email 'juni@mwvb.de'
 					}
