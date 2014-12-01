@@ -1,8 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-version = '0.2.2'
-group = 'mwvb.traviata'
+version = '0.2.3'
+group = 'com.github.traviatasoftware'
 archivesBaseName = 'traviata-interface'
 
 sourceCompatibility = 1.6
