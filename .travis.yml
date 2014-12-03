@@ -5,3 +5,8 @@ env:
   - TERM=dumb
   
 script: gradle -b traviata-interface/build.gradle build
+
+before_install:
+  sudo pip install codecov
+after_success:
+  codecov
