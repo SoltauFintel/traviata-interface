@@ -18,7 +18,7 @@ import org.dom4j.Node;
  * <br>XML Kapselung fuer vereinfachten DOM-basierten XML-Zugriff
  */
 public class XMLElementImpl implements XMLElement {
-	protected Element element;
+	private final Element element;
 
 	/**
 	 * Konstruktor
@@ -40,13 +40,8 @@ public class XMLElementImpl implements XMLElement {
 	public void setName(String name) {
 		element.setName(name);
 	}
-	
-	/**
-	 * Lesezugriff auf ein Attribut
-	 * 
-	 * @param pAttributname
-	 * @return Attributinhalt als String oder "" wenn Attribut nicht vorhanden
-	 */
+
+	@Override
 	public String getValue(String pAttributname) {
 		String ret = element.attributeValue(pAttributname);
 		if (ret == null) {
@@ -108,31 +103,16 @@ public class XMLElementImpl implements XMLElement {
 		return ret;
 	}
 	
-	/**
-	 * @return XML String
-	 */
 	@Override
 	public String getXML() {
 		return element.asXML();
 	}
 	
-	/**
-	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
-	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
-	 * 			                   dass nur Elemente zurueckgegeben werden.
-	 * @return XMLElement Liste
-	 */
 	@Override
 	public List<XMLElement> selectNodes(String pXPath) {
 		return getChildElements(element.selectNodes(pXPath));
 	}
 	
-	/**
-	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
-	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
-	 * 			                   dass nur ein Element zurueckgegeben wird.
-	 * @return XMLElement oder null wenn Element nicht gefunden
-	 */
 	@Override
 	public XMLElement selectSingleNode(String pXPath) {
 		Node node = element.selectSingleNode(pXPath);
@@ -163,24 +143,15 @@ public class XMLElementImpl implements XMLElement {
 		element.setText(pText);
 	}
 	
-	/**
-	 * @param pElementName
-	 * @return neues XMLElement
-	 */
 	@Override
 	public XMLElement add(String pElementName) {
 		return create(element.addElement(pElementName));
 	}
 	
-	/**
-	 * Diese Methode macht aus den Werten eines bestimmten Attributs aller Kindelemente einen Array.
-	 * @param pAttributName
-	 * @return List
-	 */
 	@Override
 	public List<String> getArray(String pAttributName) {
 		List<String> array = new ArrayList<String>();
-		for(Iterator<?> iter=getChildren().iterator(); iter.hasNext(); ) {
+		for (Iterator<?> iter = getChildren().iterator(); iter.hasNext(); ) {
 			XMLElement e = (XMLElement) iter.next();
 			array.add(e.getValue(pAttributName));
 		}
@@ -190,17 +161,13 @@ public class XMLElementImpl implements XMLElement {
 	@Override
 	public Map<String, String> getMap() {
 		Map<String, String> map = new HashMap<String, String>();
-		for (int i=0; i<element.attributeCount(); i++) {
+		for (int i = 0; i < element.attributeCount(); i++) {
 			Attribute attr = element.attribute(i);
 			map.put(attr.getName(), attr.getValue());
 		}
 		return map;
 	}
 	
-	/**
-	 * XML String als Kind an dieses Element anhaengen
-	 * @param pXML XML String
-	 */
 	@Override
 	public void append(String pXML) {
 		try {
@@ -211,33 +178,23 @@ public class XMLElementImpl implements XMLElement {
 		}
 	}
 	
-	/**
-	 * Alle direkten Kindelemente anhand Elementnamen loeschen
-	 * @param pElementName streng genommen XPath Anweisung fuer selectNodes
-	 */
 	@Override
 	public void removeChildren(String pElementName) {
 		List<?> list = element.selectNodes(pElementName);
-		for(Iterator<?> iter=list.iterator(); iter.hasNext();) {
+		for (Iterator<?> iter = list.iterator(); iter.hasNext();) {
 			element.remove((Element) iter.next());
 		}
 	}
 	
-	/**
-	 * @param pBeforeIndex Index vor dem das neue Element eingefuegt werden soll
-	 * @param pNewElementName neuer Elementname
-	 * @return neues Element
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public XMLElement insertBefore(int pBeforeIndex, String pNewElementName) {
 		Element neu = new DocumentFactory().createElement(pNewElementName);
-
 		int newIndex = -1;
 		List<?> c = element.content();
 		for (int i = 0; i < c.size(); i++) {
 			String n = c.get(i).getClass().getName();
-			if(n.endsWith("Element")) {
+			if (n.endsWith("Element")) {
 				newIndex++;
 				if (newIndex == pBeforeIndex) {
 					pBeforeIndex = i;
@@ -245,16 +202,10 @@ public class XMLElementImpl implements XMLElement {
 				}
 			}
 		}
-
 		element.content().add(pBeforeIndex, neu);
 		return create(neu);
 	}
 
-	/**
-	 * @param pElementName Name des zu suchenden XML Elements
-	 * @param pStart Startindex ab 0
-	 * @return Index des Elementnamens oder -1 wenn nicht gefunden
-	 */
 	@Override
 	public int indexByName(String pElementName, int pStart) {
 		List<?> children = element.elements();
@@ -266,10 +217,6 @@ public class XMLElementImpl implements XMLElement {
 		return -1;
 	}
 	
-	/**
-	 * Attribut entfernen
-	 * @param pElementName
-	 */
 	@Override
 	public void removeAttribute(String pElementName) {
 		try {
