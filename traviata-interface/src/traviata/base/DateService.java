@@ -3,13 +3,15 @@ package traviata.base;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * java.util.Date = Date and time
  */
 public class DateService {
-	private static final DateFormat date = DateFormat.getDateInstance();
-	private static final DateFormat date_time = DateFormat.getDateTimeInstance();
+	private static final DateFormat date = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.GERMANY);
+	private static final DateFormat date_time = DateFormat.getDateTimeInstance(
+			DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.GERMANY);
 	
 	private DateService() {
 	}
