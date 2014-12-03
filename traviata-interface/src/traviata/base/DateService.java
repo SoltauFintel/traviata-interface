@@ -2,13 +2,16 @@ package traviata.base;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
  * java.util.Date = Date and time
  */
 public class DateService {
-
+	private static final DateFormat ddmmyyyy  = new SimpleDateFormat("dd.MM.yyyy");
+	private static final DateFormat date_time = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+	
 	private DateService() {
 	}
 	
@@ -21,11 +24,7 @@ public class DateService {
 	}
 	
 	public static String format(java.util.Date date) {
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		return twoDigits(c.get(Calendar.DAY_OF_MONTH)) + "." +
-			twoDigits(c.get(Calendar.MONTH) + 1) + "." +
-			c.get(Calendar.YEAR);
+		return ddmmyyyy.format(date);
 	}
 	
 	public static java.util.Date toDate(String date) {
@@ -37,11 +36,7 @@ public class DateService {
 		}
 	}
 	
-	public static String twoDigits(int number) {
-		if (number < 10) {
-			return "0" + number;
-		} else {
-			return "" + number;
-		}
+	public static String formatDateTime(java.util.Date dateTime) {
+		return date_time.format(dateTime);
 	}
 }

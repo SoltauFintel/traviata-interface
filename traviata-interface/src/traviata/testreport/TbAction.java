@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import traviata.base.DateService;
 import traviata.base.xml.XMLElement;
 
 /**
@@ -62,7 +63,7 @@ public class TbAction implements Serializable {
 	public void appendTo(XMLElement parent) {
 		XMLElement e = parent.add("Action");
 		e.setValue("title", title);
-		if (starttime != null) e.setValue("starttime", TbService.format(starttime));
+		if (starttime != null) e.setValue("starttime", DateService.formatDateTime(starttime));
 		for (TbActionItem item : items) {
 			item.appendTo(e);
 		}

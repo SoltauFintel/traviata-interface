@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import traviata.base.DateService;
 import traviata.base.xml.XMLElement;
 
 public class TbTestcase implements Serializable {
@@ -54,8 +55,8 @@ public class TbTestcase implements Serializable {
 		et.setValue("runNumber", "" + runNumber);
 		et.setValue("size", "" + size);
 		et.setValue("scriptname", scriptname);
-		if (starttime != null) et.setValue("starttime", TbService.format(starttime));
-		if (endtime != null) et.setValue("endtime", TbService.format(endtime));
+		if (starttime != null) et.setValue("starttime", DateService.formatDateTime(starttime));
+		if (endtime != null) et.setValue("endtime", DateService.formatDateTime(endtime));
 		
 		XMLElement var0 = et.add("vars");
 		for (Map.Entry<String, String> ev : vars.entrySet()) {

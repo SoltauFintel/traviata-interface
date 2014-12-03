@@ -18,10 +18,6 @@ public class TbService {
 		return ret.substring(ret.length() - 6);
 	}
 
-	public static String format(java.util.Date dateTime) {
-		return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(dateTime);
-	}
-	
 	public static int toInt(XMLElement e, String feldname) {
 		return Integer.parseInt(e.getValue(feldname));
 	}

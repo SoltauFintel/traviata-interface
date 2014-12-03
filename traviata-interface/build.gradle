@@ -21,8 +21,8 @@ repositories {
 }
 
 dependencies {
-    compile 'dom4j:dom4j:1.6.1'
-    compile 'jaxen:jaxen:1.1.4'
+	compile 'dom4j:dom4j:1.6.1'
+	compile 'jaxen:jaxen:1.1.4'
 	testCompile 'junit:junit:4.11'
 }
 
