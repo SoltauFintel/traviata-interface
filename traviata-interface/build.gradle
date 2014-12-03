@@ -113,3 +113,10 @@ test {
 	}
 }
 
+def gitRevision() {
+	return "git rev-list --count HEAD".execute().text.trim();
+}
+
+task showGitRevision << {
+	println "git revision: " + gitRevision()
+}

@@ -17,5 +17,10 @@
 			<arg value="uploadArchives"/>
 		</exec>
 	</target>
+	<target name="showGitRevision">
+		<exec executable="${gradlebat}">
+			<arg value="showGitRevision"/>
+		</exec>
+	</target>
 	
 </project>
