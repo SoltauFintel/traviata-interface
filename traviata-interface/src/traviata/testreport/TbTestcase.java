@@ -65,18 +65,20 @@ public class TbTestcase implements Serializable {
 		}
 
 		XMLElement ez0 = et.add("script");
-		for (String z : script.replace("\r", "").split("\n")) {
-			XMLElement ez = ez0.add("line");
-			if (z.startsWith("\t\t")) {
-				ez.setValue("tab", "2");
-				z = z.substring(2);
-			} else if (z.startsWith("\t")) {
-				ez.setValue("tab", "1");
-				z = z.substring(1);
-			} else {
-				ez.setValue("tab", "0");
+		if (script != null) {
+			for (String z : script.replace("\r", "").split("\n")) {
+				XMLElement ez = ez0.add("line");
+				if (z.startsWith("\t\t")) {
+					ez.setValue("tab", "2");
+					z = z.substring(2);
+				} else if (z.startsWith("\t")) {
+					ez.setValue("tab", "1");
+					z = z.substring(1);
+				} else {
+					ez.setValue("tab", "0");
+				}
+				ez.setText(z);
 			}
-			ez.setText(z);
 		}
 		
 		XMLElement p = et.add("actions");
@@ -123,6 +125,7 @@ public class TbTestcase implements Serializable {
 		this.title = title;
 	}
 
+	// lfd.Nr. (Command Nr.)
 	public int getCurrentNumber() {
 		return currentNumber;
 	}
@@ -131,6 +134,7 @@ public class TbTestcase implements Serializable {
 		this.currentNumber = currentNumber;
 	}
 
+	// Lauf (lfd.Nr. innerhalb ExcelRow)
 	public int getRunNumber() {
 		return runNumber;
 	}
@@ -139,6 +143,7 @@ public class TbTestcase implements Serializable {
 		this.runNumber = runNumber;
 	}
 
+	// Anzahl (Wert aus Spalte A der ExcelRow, ABZUG-bereinigt)
 	public int getSize() {
 		return size;
 	}
