@@ -1,7 +1,13 @@
+/*
+ * (C) by Marcus Warm
+ */
 package traviata;
 
 import java.util.List;
 
+/**
+ * Traviata test application
+ */
 public interface I_Testapplication {
 
 	/**

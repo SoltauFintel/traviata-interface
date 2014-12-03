@@ -1,7 +1,13 @@
+/*
+ * (C) by Marcus Warm
+ */
 package traviata;
 
 import traviata.testreport.TbTestcase;
 
+/**
+ * Traviata test case
+ */
 public interface I_Testcase {
 	/** INTERN */
 	int NORMAL_PRIORITY = 90;
