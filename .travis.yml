@@ -6,6 +6,6 @@ env:
   
 before_install: sudo pip install codecov
 
-script: gradle -b traviata-interface/build.gradle --version build
+script: gradle -b traviata-interface/build.gradle build
 
 after_success: codecov
