@@ -21,14 +21,14 @@ public class TestTestreportPersistence {
 	@Test
 	public void tbTestberichtToXML() {
 		TbTestreport tb = create();
-		XMLDocument dok = tb.getDok();
+		XMLDocument dok = tb.getDoc();
 		dok.saveFile("temp.xml");
 		new File("temp.xml").deleteOnExit();
 	}
 	
 	@Test
 	public void xmlToTbTestbericht() {
-		XMLDocument dok = create().getDok();
+		XMLDocument dok = create().getDoc();
 		TbTestreport tb = new TbTestreport(dok);
 		Assert.assertEquals("Testcases <>", 1, tb.getTestfaelle().size());
 		List<TbAction> actions = tb.getTestfaelle().get(0).getActions();

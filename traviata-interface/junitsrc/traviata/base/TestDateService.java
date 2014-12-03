@@ -24,4 +24,11 @@ public class TestDateService {
 		final String f = "13.12.2014";
 		Assert.assertEquals(f, DateService.format(DateService.toDate(f + " 00:00:00")));
 	}
+	
+	@Test
+	public void formatDateTime() {
+		final String f = "13.12.2014 15:00:17";
+		java.util.Date d = DateService.toDate(f);
+		Assert.assertEquals(f, DateService.formatDateTime(d));
+	}
 }

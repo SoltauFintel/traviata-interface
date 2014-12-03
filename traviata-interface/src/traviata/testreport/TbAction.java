@@ -34,7 +34,7 @@ public class TbAction implements Serializable {
 			} else if ("Table".equals(n)) {
 				item = new TbTable(e);
 			} else {
-				throw new RuntimeException("Unbekannter Item: " + n);
+				throw new RuntimeException("Unknown item: " + n);
 			}
 			items.add(item);
 		}

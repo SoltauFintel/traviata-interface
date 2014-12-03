@@ -14,8 +14,8 @@ public class TbTestreport implements Serializable {
 	public TbTestreport() {
 	}
 
-	public TbTestreport(XMLDocument dok) {
-		for (XMLElement e : dok.getChildren()) {
+	public TbTestreport(XMLDocument doc) {
+		for (XMLElement e : doc.getChildren()) {
 			testcases.add(new TbTestcase(e));
 		}
 	}
@@ -24,19 +24,25 @@ public class TbTestreport implements Serializable {
 		return testcases;
 	}
 	
-	public XMLDocument getDok() {
-		XMLDocument dok = new XMLDocument("<Testreport/>");
-		XMLElement root = dok.getElement();
+	public XMLDocument getDoc() {
+		XMLDocument doc = new XMLDocument("<Testreport/>");
+		XMLElement root = doc.getElement();
 		for (TbTestcase tf : testcases) {
 			tf.appendTo(root);
 		}
-		return dok;
+		return doc;
 	}
 	
-	public TbTestcase getTestfall1() {
+	public TbTestcase getFirstTestcase() {
 		if (testcases.size() > 0) {
 			return testcases.get(0);
 		}
-		return new TbTestcase();
+		TbTestcase first = new TbTestcase();
+		testcases.add(first);
+		return first;
+	}
+	
+	public TbTestcase getLastTestcase() {
+		return testcases.get(testcases.size() - 1);
 	}
 }

@@ -9,7 +9,11 @@ public class TbErrorMessage implements TbActionItem, Serializable {
 	
 	public TbErrorMessage() {
 	}
-	
+
+	public TbErrorMessage(String text) {
+		this.text = text;
+	}
+
 	public TbErrorMessage(XMLElement e) {
 		text = "";
 		for (XMLElement s : e.getChildren()) {

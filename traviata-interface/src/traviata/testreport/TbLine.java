@@ -45,7 +45,9 @@ public class TbLine implements TbActionItem, Serializable {
 	@Override
 	public void appendTo(XMLElement parent) {
 		XMLElement e = parent.add("Line");
-		e.setValue("label", label);
+		if (label != null && !label.isEmpty()) {
+			e.setValue("label", label);
+		}
 		e.setText(text);
 	}
 }

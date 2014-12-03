@@ -180,4 +180,12 @@ public class TbTestcase implements Serializable {
 	public Map<String, String> getVars() {
 		return vars;
 	}
+	
+	public TbAction getLastAction() {
+		return getActions().get(getActions().size() - 1);
+	}
+	
+	public void addError(String errorMessage) {
+		getLastAction().getItems().add(new TbErrorMessage(errorMessage));
+	}
 }

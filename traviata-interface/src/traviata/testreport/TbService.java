@@ -1,9 +1,8 @@
 package traviata.testreport;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.zip.CRC32;
 
+import traviata.base.DateService;
 import traviata.base.xml.XMLElement;
 
 public class TbService {
@@ -18,19 +17,12 @@ public class TbService {
 		return ret.substring(ret.length() - 6);
 	}
 
-	public static int toInt(XMLElement e, String feldname) {
-		return Integer.parseInt(e.getValue(feldname));
+	public static int toInt(XMLElement e, String fieldname) {
+		return Integer.parseInt(e.getValue(fieldname));
 	}
 	
-	public static java.util.Date toDate(XMLElement e, String feldname) {
-		String i = e.getValue(feldname);
-		if (i.isEmpty()) {
-			return null;
-		}
-		try {
-			return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").parse(i);
-		} catch (ParseException e1) {
-			throw new RuntimeException("Error parsing: " + i, e1);
-		}
+	public static java.util.Date toDate(XMLElement e, String fieldname) {
+		String val = e.getValue(fieldname);
+		return val.isEmpty() ? null : DateService.toDate(val);
 	}
 }
