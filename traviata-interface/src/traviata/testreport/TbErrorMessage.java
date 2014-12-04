@@ -33,7 +33,7 @@ public class TbErrorMessage implements TbActionItem, Serializable {
 	public void appendTo(XMLElement parent) {
 		XMLElement e = parent.add("ErrorMessage");
 		for (String z : text.replace("\r", "").split("\n")) {
-			e.add("s").setText(z);
+			e.add("s").setText(z.startsWith("at ") ? "\t" + z : z);
 		}
 	}
 }
