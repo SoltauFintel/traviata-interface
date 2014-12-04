@@ -18,7 +18,9 @@ import traviata.testreport.TbTestcase;
 import traviata.testreport.TbTestreport;
 
 public class TestTestreportPersistence {
-
+	private static final String stacktrace = "java.lang.ClassCastException: Das Konvertieren auf Pussemuckel hat nicht geklappt.\n"
+			+ "\tat de.irgendwo.Pussemuckel.troete(Pussemuckel.java:17)";
+	
 	@Test
 	public void tbTestberichtToXML() {
 		TbTestreport tb = create();
@@ -46,6 +48,7 @@ public class TestTestreportPersistence {
 		Assert.assertNotNull("TbTable.title <>", ((TbTable) actions.get(0).getItems().get(2)).getTitle());
 		Assert.assertFalse("TbTable.headers <>", ((TbTable) actions.get(0).getItems().get(2)).getHeaders().isEmpty());
 		Assert.assertFalse("TbTable.lines <>", ((TbTable) actions.get(0).getItems().get(2)).getLines().isEmpty());
+		Assert.assertEquals("stacktrace <>", stacktrace, ((TbErrorMessage) actions.get(0).getItems().get(3)).getText());
 	}
 
 	private TbTestreport create() {
@@ -83,8 +86,7 @@ public class TestTestreportPersistence {
 		
 		createTabelle(gp);
 
-		gp.addError("java.lang.ClassCastException: Das Konvertieren auf Pussemuckel hat nicht geklappt.\n"
-				+ "\tat de.irgendwo.Pussemuckel.troete(Pussemuckel.java:17)");
+		gp.addError(stacktrace);
 		
 		return tb;
 	}
@@ -111,5 +113,24 @@ public class TestTestreportPersistence {
 		zeilen.add(zeile);
 		t.setLines(zeilen);
 		gp.getItems().add(t);
+	}
+	
+	/** XML Text contains \t. If the file was saved the \t was not saved. Solutin: pFormat.setTrimText(false); */
+	@Test
+	public void tab() {
+		final String dn = "temp-tab.xml";
+		TbErrorMessage em = new TbErrorMessage(stacktrace);
+		XMLDocument doc = new XMLDocument("<a/>");
+		em.appendTo(doc.getElement());
+		Assert.assertTrue("tab is missing in getXML()", doc.getXML().contains("\t"));
+		doc.saveFile(dn);
+		doc = null;
+		em = null;
+		
+		File file = new File(dn);
+		XMLDocument doc2 = new XMLDocument(file);
+		TbErrorMessage em2 = new TbErrorMessage(doc2.getElement().getChildren().get(0));
+		Assert.assertEquals("Failure!\n", stacktrace, em2.getText());
+		file.deleteOnExit();
 	}
 }

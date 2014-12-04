@@ -175,6 +175,7 @@ public class XMLDocument implements Serializable {
 	
 	protected void saveFile(String pDateiname, OutputFormat pFormat) {
 		pFormat.setEncoding("windows-1252");
+		pFormat.setTrimText(false);
         try {
 			XMLWriter writer = new XMLWriter(
 					new FileWriter(pDateiname), 

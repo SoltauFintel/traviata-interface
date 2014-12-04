@@ -4,5 +4,5 @@
 /generated
 /velocity.log
 /log
-/temp.xml
+/temp*.xml
 /gradle.properties

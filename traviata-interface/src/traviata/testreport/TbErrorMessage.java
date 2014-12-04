@@ -17,7 +17,8 @@ public class TbErrorMessage implements TbActionItem, Serializable {
 	public TbErrorMessage(XMLElement e) {
 		text = "";
 		for (XMLElement s : e.getChildren()) {
-			text += s.getText() + "\n";
+			if (!text.isEmpty()) text += "\n";
+			text += s.getText();
 		}
 	}
 	
@@ -33,7 +34,7 @@ public class TbErrorMessage implements TbActionItem, Serializable {
 	public void appendTo(XMLElement parent) {
 		XMLElement e = parent.add("ErrorMessage");
 		for (String z : text.replace("\r", "").split("\n")) {
-			e.add("s").setText(z.startsWith("at ") ? "\t" + z : z);
+			e.add("s").setText(z);
 		}
 	}
 }
