@@ -3,6 +3,8 @@ package traviata.testreport;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import traviata.base.xml.XMLDocument;
 import traviata.base.xml.XMLElement;
@@ -10,23 +12,41 @@ import traviata.base.xml.XMLElement;
 // Prefix "Tb" = Test report (Testbericht in German)
 public class TbTestreport implements Serializable {
 	private final List<TbTestcase> testcases = new ArrayList<TbTestcase>();
+	private final Map<String, String> parameters = new TreeMap<String, String>();
 
 	public TbTestreport() {
 	}
 
 	public TbTestreport(XMLDocument doc) {
-		for (XMLElement e : doc.getChildren()) {
+		for (XMLElement e : doc.getElement().selectNodes("head/parameter")) {
+			parameters.put(e.getValue("name"), e.getText());
+		}
+		for (XMLElement e : doc.getElement().selectNodes("Testcase")) {
 			testcases.add(new TbTestcase(e));
 		}
 	}
 	
-	public List<TbTestcase> getTestfaelle() {
+	public List<TbTestcase> getTestcases() {
 		return testcases;
 	}
 	
+	public Map<String, String> getParameters() {
+		return parameters;
+	}
+	
+	public void setPar(String name, String value) {
+		parameters.put(name, value);
+	}
+
 	public XMLDocument getDoc() {
 		XMLDocument doc = new XMLDocument("<Testreport/>");
 		XMLElement root = doc.getElement();
+		XMLElement head = root.add("head");
+		for (Map.Entry<String, String> e : parameters.entrySet()) {
+			XMLElement parameter = head.add("parameter");
+			parameter.setValue("name", e.getKey());
+			parameter.setText(e.getValue());
+		}
 		for (TbTestcase tf : testcases) {
 			tf.appendTo(root);
 		}

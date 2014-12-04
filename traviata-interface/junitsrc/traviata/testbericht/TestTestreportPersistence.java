@@ -30,8 +30,10 @@ public class TestTestreportPersistence {
 	public void xmlToTbTestbericht() {
 		XMLDocument dok = create().getDoc();
 		TbTestreport tb = new TbTestreport(dok);
-		Assert.assertEquals("Testcases <>", 1, tb.getTestfaelle().size());
-		List<TbAction> actions = tb.getTestfaelle().get(0).getActions();
+		Assert.assertEquals("Testcases <>", 1, tb.getTestcases().size());
+		List<TbAction> actions = tb.getTestcases().get(0).getActions();
+		Assert.assertEquals("Parameters.size <>", 2, tb.getParameters().size());
+		Assert.assertEquals("Parameter <>", "bar", tb.getParameters().get("foo"));
 		Assert.assertEquals("Actions <>", 1, actions.size());
 		Assert.assertEquals("Items <>", 4, actions.get(0).getItems().size());
 		Assert.assertTrue("TbLine <>", actions.get(0).getItems().get(0) instanceof TbLine);
@@ -47,6 +49,8 @@ public class TestTestreportPersistence {
 
 	private TbTestreport create() {
 		TbTestreport tb = new TbTestreport();
+		tb.setPar("foo", "bar");
+		tb.setPar("0815", "4711");
 
 		TbTestcase tf = new TbTestcase();
 		tf.setTitle("Der 1. Testfall");
@@ -58,7 +62,7 @@ public class TestTestreportPersistence {
 		tf.setRunNumber(1);
 		tf.setStarttime(new java.util.Date());
 		tf.getVars().put("hey", "ho");
-		tb.getTestfaelle().add(tf);
+		tb.getTestcases().add(tf);
 		
 		TbAction gp = new TbAction();
 		gp.setStarttime(new java.util.Date());
@@ -78,11 +82,9 @@ public class TestTestreportPersistence {
 		gp.getItems().add(b);
 		
 		createTabelle(gp);
-		
-		TbErrorMessage f = new TbErrorMessage();
-		f.setText("java.lang.ClassCastException: Das Konvertieren auf Pussemuckel hat nicht geklappt.\n"
+
+		gp.addError("java.lang.ClassCastException: Das Konvertieren auf Pussemuckel hat nicht geklappt.\n"
 				+ "\tat de.irgendwo.Pussemuckel.troete(Pussemuckel.java:17)");
-		gp.getItems().add(f);
 		
 		return tb;
 	}

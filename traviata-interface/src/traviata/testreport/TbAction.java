@@ -19,6 +19,13 @@ public class TbAction implements Serializable {
 	public TbAction() {
 	}
 	
+	public static TbAction empty() {
+		TbAction a = new TbAction();
+		a.setStarttime(new java.util.Date());
+		a.setTitle("");
+		return a;
+	}
+	
 	public TbAction(XMLElement ea) {
 		title = ea.getValue("title");
 		starttime = TbService.toDate(ea, "starttime");
@@ -51,6 +58,10 @@ public class TbAction implements Serializable {
 	public List<TbActionItem> getItems() {
 		return items;
 	}
+	
+	public void add(TbActionItem item) {
+		items.add(item);
+	}
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -58,6 +69,10 @@ public class TbAction implements Serializable {
 
 	public void setStarttime(java.util.Date starttime) {
 		this.starttime = starttime;
+	}
+	
+	public void addError(String errorMessage) {
+		items.add(new TbErrorMessage(errorMessage));
 	}
 	
 	public void appendTo(XMLElement parent) {

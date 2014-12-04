@@ -14,8 +14,11 @@ public class TbTestcase implements Serializable {
 	private final Map<String, String> vars = new TreeMap<String, String>();
 	private String script;
 	private String title;
-	private int currentNumber, runNumber, size;
+	private int currentNumber; // lfd.Nr. (Command Nr.)
+	private int runNumber;     // Lauf (lfd.Nr. innerhalb ExcelRow)
+	private int size;          // Anzahl (Wert aus Spalte A der ExcelRow, ABZUG-bereinigt)
 	private String scriptname;
+	private String classification; // Produktname
 	private java.util.Date starttime;
 	private java.util.Date endtime;
 	
@@ -28,6 +31,7 @@ public class TbTestcase implements Serializable {
 		runNumber = TbService.toInt(e, "runNumber");
 		size = TbService.toInt(e, "size");
 		scriptname = e.getValue("scriptname");
+		classification = e.getValue("classification");
 		starttime = TbService.toDate(e, "starttime");
 		endtime = TbService.toDate(e, "endtime");
 		for (XMLElement v : e.selectNodes("vars/var")) {
@@ -55,6 +59,7 @@ public class TbTestcase implements Serializable {
 		et.setValue("runNumber", "" + runNumber);
 		et.setValue("size", "" + size);
 		et.setValue("scriptname", scriptname);
+		et.setValue("classification", classification);
 		if (starttime != null) et.setValue("starttime", DateService.formatDateTime(starttime));
 		if (endtime != null) et.setValue("endtime", DateService.formatDateTime(endtime));
 		
@@ -126,7 +131,6 @@ public class TbTestcase implements Serializable {
 		this.title = title;
 	}
 
-	// lfd.Nr. (Command Nr.)
 	public int getCurrentNumber() {
 		return currentNumber;
 	}
@@ -135,7 +139,6 @@ public class TbTestcase implements Serializable {
 		this.currentNumber = currentNumber;
 	}
 
-	// Lauf (lfd.Nr. innerhalb ExcelRow)
 	public int getRunNumber() {
 		return runNumber;
 	}
@@ -144,7 +147,6 @@ public class TbTestcase implements Serializable {
 		this.runNumber = runNumber;
 	}
 
-	// Anzahl (Wert aus Spalte A der ExcelRow, ABZUG-bereinigt)
 	public int getSize() {
 		return size;
 	}
@@ -159,6 +161,14 @@ public class TbTestcase implements Serializable {
 
 	public void setScriptname(String scriptname) {
 		this.scriptname = scriptname;
+	}
+
+	public String getClassification() {
+		return classification;
+	}
+
+	public void setClassification(String classification) {
+		this.classification = classification;
 	}
 
 	public java.util.Date getStarttime() {
@@ -186,6 +196,13 @@ public class TbTestcase implements Serializable {
 	}
 	
 	public void addError(String errorMessage) {
-		getLastAction().getItems().add(new TbErrorMessage(errorMessage));
+		if (errorMessage == null || errorMessage.isEmpty()) return;
+		TbAction action;
+		if (actions.isEmpty()) {
+			actions.add(action = TbAction.empty());
+		} else {
+			action = getLastAction();
+		}
+		action.addError(errorMessage);
 	}
 }
