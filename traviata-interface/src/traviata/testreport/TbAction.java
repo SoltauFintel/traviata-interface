@@ -2,7 +2,6 @@ package traviata.testreport;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import traviata.base.DateService;
@@ -13,7 +12,7 @@ import traviata.base.xml.XMLElement;
  */
 public class TbAction implements Serializable {
 	private String title;
-	private java.util.Date starttime;
+	private String starttime;
 	private final List<TbActionItem> items = new ArrayList<TbActionItem>();
 	
 	public TbAction() {
@@ -21,14 +20,14 @@ public class TbAction implements Serializable {
 	
 	public static TbAction empty() {
 		TbAction a = new TbAction();
-		a.setStarttime(new java.util.Date());
+		a.setStarttime(DateService.nowString());
 		a.setTitle("");
 		return a;
 	}
 	
 	public TbAction(XMLElement ea) {
 		title = ea.getValue("title");
-		starttime = TbService.toDate(ea, "starttime");
+		starttime = ea.getValue("starttime");
 		for (XMLElement e : ea.getChildren()) {
 			TbActionItem item;
 			String n = e.getName();
@@ -51,7 +50,7 @@ public class TbAction implements Serializable {
 		return title;
 	}
 
-	public Date getStarttime() {
+	public String getStarttime() {
 		return starttime;
 	}
 
@@ -67,7 +66,7 @@ public class TbAction implements Serializable {
 		this.title = title;
 	}
 
-	public void setStarttime(java.util.Date starttime) {
+	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
 	
@@ -78,7 +77,7 @@ public class TbAction implements Serializable {
 	public void appendTo(XMLElement parent) {
 		XMLElement e = parent.add("Action");
 		e.setValue("title", title);
-		if (starttime != null) e.setValue("starttime", DateService.formatDateTime(starttime));
+		if (starttime != null) e.setValue("starttime", starttime);
 		for (TbActionItem item : items) {
 			item.appendTo(e);
 		}

@@ -2,6 +2,7 @@ package traviata.base;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -38,5 +39,9 @@ public class DateService {
 	
 	public static String formatDateTime(java.util.Date pDateTime) {
 		return date_time.format(pDateTime);
+	}
+
+	public static String nowString() {
+		return new SimpleDateFormat("HH:mm:ss").format(new java.util.Date());
 	}
 }

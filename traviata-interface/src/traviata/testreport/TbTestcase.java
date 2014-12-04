@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import traviata.base.DateService;
 import traviata.base.xml.XMLElement;
 
 public class TbTestcase implements Serializable {
@@ -19,8 +18,8 @@ public class TbTestcase implements Serializable {
 	private int size;          // Anzahl (Wert aus Spalte A der ExcelRow, ABZUG-bereinigt)
 	private String scriptname;
 	private String classification; // Produktname
-	private java.util.Date starttime;
-	private java.util.Date endtime;
+	private String starttime;
+	private String endtime;
 	
 	public TbTestcase() {
 	}
@@ -32,8 +31,8 @@ public class TbTestcase implements Serializable {
 		size = TbService.toInt(e, "size");
 		scriptname = e.getValue("scriptname");
 		classification = e.getValue("classification");
-		starttime = TbService.toDate(e, "starttime");
-		endtime = TbService.toDate(e, "endtime");
+		starttime = e.getValue("starttime");
+		endtime = e.getValue("endtime");
 		for (XMLElement v : e.selectNodes("vars/var")) {
 			vars.put(v.getValue("name"), v.getText());
 		}
@@ -60,8 +59,8 @@ public class TbTestcase implements Serializable {
 		et.setValue("size", "" + size);
 		et.setValue("scriptname", scriptname);
 		et.setValue("classification", classification);
-		if (starttime != null) et.setValue("starttime", DateService.formatDateTime(starttime));
-		if (endtime != null) et.setValue("endtime", DateService.formatDateTime(endtime));
+		if (starttime != null) et.setValue("starttime", starttime);
+		if (endtime != null) et.setValue("endtime", endtime);
 		
 		XMLElement var0 = et.add("vars");
 		for (Map.Entry<String, String> ev : vars.entrySet()) {
@@ -171,19 +170,19 @@ public class TbTestcase implements Serializable {
 		this.classification = classification;
 	}
 
-	public java.util.Date getStarttime() {
+	public String getStarttime() {
 		return starttime;
 	}
 
-	public void setStarttime(java.util.Date starttime) {
+	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
 
-	public java.util.Date getEndtime() {
+	public String getEndtime() {
 		return endtime;
 	}
 
-	public void setEndtime(java.util.Date endtime) {
+	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
 

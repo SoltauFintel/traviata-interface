@@ -6,6 +6,10 @@
 			<arg value="build"/>
 		</exec>
 	</target>
+	<target name="copy lib" depends="build">
+		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT.jar" todir="C:\dat\lib"/>
+		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT-sources.jar" todir="C:\dat\lib"/>
+	</target>
 	<target name="eclipse">
 		<exec executable="${gradlebat}">
 			<arg value="eclipse"/>

@@ -1,6 +1,7 @@
 package traviata.testbericht;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,19 +54,18 @@ public class TestTestreportPersistence {
 		tb.setPar("0815", "4711");
 
 		TbTestcase tf = new TbTestcase();
+		tf.setStarttime(new SimpleDateFormat("HH:mm:ss").format(new java.util.Date()));
 		tf.setTitle("Der 1. Testfall");
 		tf.setScriptname("vertrag/Neuanlage");
 		tf.setScript("GPVertragNeuanlage\n\tPartnersuche\n\t\tperson = true\nGPVertragAuskunft\n");
 		tf.setSize(1);
-		tf.setEndtime(new java.util.Date());
 		tf.setCurrentNumber(1);
 		tf.setRunNumber(1);
-		tf.setStarttime(new java.util.Date());
 		tf.getVars().put("hey", "ho");
+		tf.setEndtime(new SimpleDateFormat("HH:mm:ss").format(new java.util.Date()));
 		tb.getTestcases().add(tf);
 		
-		TbAction gp = new TbAction();
-		gp.setStarttime(new java.util.Date());
+		TbAction gp = TbAction.empty();
 		gp.setTitle("Vertrag:Neuanlage");
 		tf.getActions().add(gp);
 		
