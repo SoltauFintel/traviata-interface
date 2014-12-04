@@ -6,6 +6,6 @@ env:
   
 before_install: sudo pip install codecov
 
-script: gradle -b traviata-interface/build.gradle build jacocoTestReport
+script: gradle -b traviata-interface/build.gradle build jacocoTestReport -PossrhUsername=unknown -PossrhPassword=pw
 
 after_success: codecov
