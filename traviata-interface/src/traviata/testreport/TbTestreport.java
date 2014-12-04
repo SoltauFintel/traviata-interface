@@ -13,6 +13,7 @@ import traviata.base.xml.XMLElement;
 public class TbTestreport implements Serializable {
 	private final List<TbTestcase> testcases = new ArrayList<TbTestcase>();
 	private final Map<String, String> parameters = new TreeMap<String, String>();
+	private String version;
 
 	public TbTestreport() {
 	}
@@ -21,6 +22,8 @@ public class TbTestreport implements Serializable {
 		for (XMLElement e : doc.getElement().selectNodes("head/parameter")) {
 			parameters.put(e.getValue("name"), e.getText());
 		}
+		XMLElement ee = doc.getElement().selectSingleNode("version");
+		version = ee == null ? "" : ee.getText();
 		for (XMLElement e : doc.getElement().selectNodes("Testcase")) {
 			testcases.add(new TbTestcase(e));
 		}
@@ -37,6 +40,14 @@ public class TbTestreport implements Serializable {
 	public void setPar(String name, String value) {
 		parameters.put(name, value);
 	}
+	
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
 	public XMLDocument getDoc() {
 		XMLDocument doc = new XMLDocument("<Testreport/>");
@@ -47,6 +58,7 @@ public class TbTestreport implements Serializable {
 			parameter.setValue("name", e.getKey());
 			parameter.setText(e.getValue());
 		}
+		root.add("version").setText(version == null ? "" : version);
 		for (TbTestcase tf : testcases) {
 			tf.appendTo(root);
 		}
