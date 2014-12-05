@@ -7,6 +7,7 @@
 		</exec>
 	</target>
 	<target name="copy lib" depends="build">
+		<!-- man muss in build.gradle auskommentieren: von "signing {" bis Ende -->
 		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT.jar" todir="C:\dat\lib"/>
 		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT-sources.jar" todir="C:\dat\lib"/>
 		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT-javadoc.jar" todir="C:\dat\lib"/>
