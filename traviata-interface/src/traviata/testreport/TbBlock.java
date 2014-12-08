@@ -16,7 +16,9 @@ public class TbBlock extends TbActionItemWithTitle implements Serializable {
 	}
 	
 	public TbBlock(XMLElement e) {
-		setTitle(e.getValue("title"));
+		if (e.hasAttribute("title")) {
+			setTitle(e.getValue("title"));
+		}
 		for (XMLElement ee : e.getChildren()) {
 			lines.add(new TbLine(ee));
 		}
@@ -33,7 +35,9 @@ public class TbBlock extends TbActionItemWithTitle implements Serializable {
 	@Override
 	public void appendTo(XMLElement parent) {
 		XMLElement e = parent.add("Block");
-		e.setValue("title", getTitle());
+		if (getTitle() != null) {
+			e.setValue("title", getTitle());
+		}
 		for (TbLine z : lines) {
 			z.appendTo(e);
 		}

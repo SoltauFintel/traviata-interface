@@ -29,6 +29,14 @@ public class TbTable extends TbActionItemWithTitle implements Serializable {
 		}
 	}
 	
+	public static TbTable createTable(String title, String ... headers) {
+		TbTable table = new TbTable();
+		table.setTitle(title);
+		table.setHeaders(makeList(headers));
+		table.setLines(new ArrayList<List<String>>());
+		return table;
+	}
+
 	public List<String> getHeaders() {
 		return headers;
 	}
@@ -59,5 +67,17 @@ public class TbTable extends TbActionItemWithTitle implements Serializable {
 				z.add("c").setText(c);
 			}
 		}
+	}
+	
+	public void addLine(String ... cols) {
+		lines.add(makeList(cols));
+	}
+	
+	private static List<String> makeList(String ... items) {
+		List<String> list = new ArrayList<String>();
+		for (String item : items) {
+			list.add(item);
+		}
+		return list;
 	}
 }

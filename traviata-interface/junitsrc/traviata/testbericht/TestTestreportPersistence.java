@@ -82,7 +82,7 @@ public class TestTestreportPersistence {
 		z.setText("T1001");
 		b.getLines().add(z);
 		b.getLines().add(new TbLine("Produktlinie", "Best Selection"));
-		gp.getItems().add(b);
+		tb.addItem(b);
 		
 		createTabelle(gp);
 
@@ -106,12 +106,8 @@ public class TestTestreportPersistence {
 		zeile.add("arabische-eins");
 		zeile.add("1");
 		zeilen.add(zeile);
-		zeile = new ArrayList<String>();
-		zeile.add("2");
-		zeile.add("2 (Sp.2)");
-		zeile.add("2");
-		zeilen.add(zeile);
 		t.setLines(zeilen);
+		t.addLine("2", "2 (Sp.2)", "2");
 		gp.getItems().add(t);
 	}
 	

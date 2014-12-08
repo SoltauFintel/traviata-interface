@@ -77,4 +77,8 @@ public class TbTestreport implements Serializable {
 	public TbTestcase getLastTestcase() {
 		return testcases.get(testcases.size() - 1);
 	}
+
+	public void addItem(TbActionItem item) {
+		getLastTestcase().getLastAction().add(item);
+	}
 }
