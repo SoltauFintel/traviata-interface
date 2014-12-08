@@ -191,7 +191,7 @@ public class XMLDocument implements Serializable {
 	 * @return true wenn Dokument gueltig und das root-Element Kind-Elemente besitzt
 	 */
 	public boolean isOkay() {
-		return dok!=null
+		return dok != null
 			&& dok.getRootElement() != null
 			&& dok.getRootElement().elements() != null
 			&& dok.getRootElement().elements().size() > 0;
@@ -201,7 +201,7 @@ public class XMLDocument implements Serializable {
 	 * @return root Element
 	 */
 	public XMLElement getElement() {
-		return dok==null ? null : XMLElementImpl.create(dok.getRootElement());
+		return dok == null ? null : XMLElementImpl.create(dok.getRootElement());
 	}
 	
 	/**
@@ -231,7 +231,7 @@ public class XMLDocument implements Serializable {
 	 */
 	public XMLElement selectSingleNode(String pXPath) {
 		Node node = dok.selectSingleNode(pXPath);
-		if(node==null) {
+		if (node == null) {
 			return null;
 		} else {
 			return XMLElementImpl.create((Element) node);

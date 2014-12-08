@@ -14,23 +14,18 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 
 /**
- * XML Element
- * <br>XML Kapselung fuer vereinfachten DOM-basierten XML-Zugriff
+ * XMLElement implementation
  */
 public class XMLElementImpl implements XMLElement {
 	private final Element element;
 
 	/**
-	 * Konstruktor
 	 * @param pElement
 	 */
 	XMLElementImpl(Element pElement) { 
 		element = pElement;
 	}
 	
-	/**
-	 * @return Tag-Name des XML Elements
-	 */
 	@Override
 	public String getName() {
 		return element.getName();
@@ -42,44 +37,38 @@ public class XMLElementImpl implements XMLElement {
 	}
 
 	@Override
-	public String getValue(String pAttributname) {
-		String ret = element.attributeValue(pAttributname);
-		if (ret == null) {
-			ret = "";
-		}
-		return ret;
+	public String getValue(String attributname) {
+		String ret = element.attributeValue(attributname);
+		return ret == null ? "" : ret;
 	}
 	
 	@Override
-	public String getMultiLineValue(String pAttributname) {
-		String ret = getValue(pAttributname);
-		return ret.replace(NEWLINE, "\n");
+	public String getMultiLineValue(String attributname) {
+		return getValue(attributname).replace(NEWLINE, "\n");
 	}
 	
 	@Override
-	public void setValue(String pAttributname, String pValue) {
-		element.addAttribute(pAttributname, pValue);
+	public void setValue(String attributname, String value) {
+		element.addAttribute(attributname, value);
 	}
 	
 	@Override
-	public void setMultiLineValue(String pAttributname, String pValue) {
-		if (pValue == null) {
-			setValue(pAttributname, pValue);
+	public void setMultiLineValue(String attributname, String value) {
+		if (value == null) {
+			setValue(attributname, value);
 		} else {
-			setValue(pAttributname, 
-					pValue.replace("\r", "").replace("\n", NEWLINE));
+			setValue(attributname, 
+					value.replace("\r", "").replace("\n", NEWLINE));
 		}
 	}
 	
-	public void setValueIfNotNull(String pAttributname, String pValue) {
-		if (pValue != null) {
-			element.addAttribute(pAttributname, pValue);
+	@Override
+	public void setValueIfNotNull(String attributname, String value) {
+		if (value != null) {
+			element.addAttribute(attributname, value);
 		}
 	}
 	
-	/**
-	 * @return Kindelemente
-	 */
 	@Override
 	public List<XMLElement> getChildren() {
 		return getChildElements(element.elements());
@@ -109,13 +98,13 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	@Override
-	public List<XMLElement> selectNodes(String pXPath) {
-		return getChildElements(element.selectNodes(pXPath));
+	public List<XMLElement> selectNodes(String xpath) {
+		return getChildElements(element.selectNodes(xpath));
 	}
 	
 	@Override
-	public XMLElement selectSingleNode(String pXPath) {
-		Node node = element.selectSingleNode(pXPath);
+	public XMLElement selectSingleNode(String xpath) {
+		Node node = element.selectSingleNode(xpath);
 		if (node == null || !(node instanceof Element)) {
 			return null;
 		} else {
@@ -129,8 +118,8 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	@Override
-	public String getAttributeName(int pIndex) {
-		return element.attribute(pIndex).getName();
+	public String getAttributeName(int index) {
+		return element.attribute(index).getName();
 	}
 	
 	@Override
@@ -139,20 +128,19 @@ public class XMLElementImpl implements XMLElement {
 	}
 
 	@Override
-	public void setText(String pText) {
-		element.setText(pText);
+	public void setText(String text) {
+		element.setText(text);
 	}
 	
 	@Override
-	public XMLElement add(String pElementName) {
-		return create(element.addElement(pElementName));
+	public XMLElement add(String elementName) {
+		return create(element.addElement(elementName));
 	}
 	
 	@Override
 	public List<String> getArray(String pAttributName) {
 		List<String> array = new ArrayList<String>();
-		for (Iterator<?> iter = getChildren().iterator(); iter.hasNext(); ) {
-			XMLElement e = (XMLElement) iter.next();
+		for (XMLElement e : getChildren()) {
 			array.add(e.getValue(pAttributName));
 		}
 		return array;
@@ -169,9 +157,9 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	@Override
-	public void append(String pXML) {
+	public void append(String xml) {
 		try {
-			Document dok = DocumentHelper.parseText(pXML);
+			Document dok = DocumentHelper.parseText(xml);
 			element.add(dok.getRootElement());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -179,8 +167,8 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	@Override
-	public void removeChildren(String pElementName) {
-		List<?> list = element.selectNodes(pElementName);
+	public void removeChildren(String elementName) {
+		List<?> list = element.selectNodes(elementName);
 		for (Iterator<?> iter = list.iterator(); iter.hasNext();) {
 			element.remove((Element) iter.next());
 		}
@@ -188,29 +176,29 @@ public class XMLElementImpl implements XMLElement {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public XMLElement insertBefore(int pBeforeIndex, String pNewElementName) {
-		Element neu = new DocumentFactory().createElement(pNewElementName);
+	public XMLElement insertBefore(int beforeIndex, String newElementName) {
+		Element newElement = new DocumentFactory().createElement(newElementName);
 		int newIndex = -1;
 		List<?> c = element.content();
 		for (int i = 0; i < c.size(); i++) {
 			String n = c.get(i).getClass().getName();
 			if (n.endsWith("Element")) {
 				newIndex++;
-				if (newIndex == pBeforeIndex) {
-					pBeforeIndex = i;
+				if (newIndex == beforeIndex) {
+					beforeIndex = i;
 					break;
 				}
 			}
 		}
-		element.content().add(pBeforeIndex, neu);
-		return create(neu);
+		element.content().add(beforeIndex, newElement);
+		return create(newElement);
 	}
 
 	@Override
-	public int indexByName(String pElementName, int pStart) {
+	public int indexByName(String elementName, int start) {
 		List<?> children = element.elements();
-		for (int i = pStart; i < children.size(); i++) {
-			if (((Element) children.get(i)).getName().equals(pElementName)) {
+		for (int i = start; i < children.size(); i++) {
+			if (((Element) children.get(i)).getName().equals(elementName)) {
 				return i;
 			}
 		}
@@ -218,9 +206,9 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	@Override
-	public void removeAttribute(String pElementName) {
+	public void removeAttribute(String elementName) {
 		try {
-			element.remove(element.attribute(pElementName));
+			element.remove(element.attribute(elementName));
 		} catch (Exception ignored) { 
 		}
 	}
@@ -230,20 +218,20 @@ public class XMLElementImpl implements XMLElement {
 	}
 	
 	@Override
-	public boolean hasAttribute(String pAttributname) {
-		return element.attributeValue(pAttributname) != null;
+	public boolean hasAttribute(String attributname) {
+		return element.attributeValue(attributname) != null;
 	}
 
 	@Override
 	public void removeEmptyAttributes() {
-		List<String> zuLoeschendeAttribute = new ArrayList<String>();
+		List<String> kill = new ArrayList<String>();
 		for (int i = 0; i < getAttributeCount(); i++) {
 			String name = getAttributeName(i);
 			if ("".equals(getValue(name))) {
-				zuLoeschendeAttribute.add(name);
+				kill.add(name);
 			}
 		}
-		for (String name : zuLoeschendeAttribute) {
+		for (String name : kill) {
 			removeAttribute(name);
 		}
 	}

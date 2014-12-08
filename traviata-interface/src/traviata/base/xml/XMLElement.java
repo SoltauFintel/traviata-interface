@@ -12,10 +12,10 @@ public interface XMLElement {
 
 	/**
 	 * Attributzugriff via Attributname
-	 * @param pAttributname Attributname
+	 * @param attributname Attributname
 	 * @return Attributinhalt als String
 	 */
-	String getValue(String pAttributname);
+	String getValue(String attributname);
 
 	/**
 	 * Subelemente
@@ -43,25 +43,25 @@ public interface XMLElement {
 	
 	/**
 	 * Schreibzugriff auf ein Attribut
-	 * @param pAttributname
-	 * @param pValue
+	 * @param attributname
+	 * @param value
 	 */
-	void setValue(String pAttributname, String pValue);
+	void setValue(String attributname, String value);
 	
 	/**
 	 * Schreibzugriff auf ein Attribut
-	 * @param pAttributname
-	 * @param pValue mehrzeiliger Inhalt
+	 * @param attributname
+	 * @param value mehrzeiliger Inhalt
 	 */
-	void setMultiLineValue(String pAttributname, String pValue);
+	void setMultiLineValue(String attributname, String value);
 	
 	/**
 	 * Attributzugriff via Attributname
 	 * <p>Mehrzeilige Attributinhalte werden mit "\n" getrennt.
-	 * @param pAttributname Attributname
+	 * @param attributname Attributname
 	 * @return Attributinhalt als String
 	 */
-	String getMultiLineValue(String pAttributname);
+	String getMultiLineValue(String attributname);
 	
 	/**
 	 * @return XML String
@@ -70,19 +70,19 @@ public interface XMLElement {
 
 	/**
 	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
-	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
+	 * @param xpath XPath String. Der XPath String muss so aufgebaut sein,
 	 * 			                   dass nur Elemente zurueckgegeben werden.
 	 * @return XMLElement Liste
 	 */
-	List<XMLElement> selectNodes(String pXPath);
+	List<XMLElement> selectNodes(String xpath);
 
 	/**
 	 * Wenn die XPath-Anweisung fehlerhaft ist wird eine Exception ausgeloest.
-	 * @param pXPath XPath String. Der XPath String muss so aufgebaut sein,
+	 * @param xpath XPath String. Der XPath String muss so aufgebaut sein,
 	 * 			                   dass nur ein Element zurueckgegeben wird.
 	 * @return XMLElement oder null wenn Element nicht gefunden
 	 */
-	XMLElement selectSingleNode(String pXPath);
+	XMLElement selectSingleNode(String xpath);
 
 	/**
 	 * @return innerer Text
@@ -90,22 +90,22 @@ public interface XMLElement {
 	String getText();
 
 	/**
-	 * @param pText innerer Text
+	 * @param text innerer Text
 	 */
-	void setText(String pText);
+	void setText(String text);
 
 	/**
-	 * @param pElementName
+	 * @param elementName
 	 * @return neues XMLElement
 	 */
-	XMLElement add(String pElementName);
+	XMLElement add(String elementName);
 
 	/**
 	 * Diese Methode macht aus den Werten eines bestimmten Attributs aller Kindelemente einen Array.
-	 * @param pAttributName
+	 * @param attributname
 	 * @return List
 	 */
-	List<String> getArray(String pAttributName);
+	List<String> getArray(String attributname);
 
 	/**
 	 * Diese Methode macht aus allen Attributen eine Map.
@@ -117,15 +117,15 @@ public interface XMLElement {
 	
 	/**
 	 * XML String als Kind an dieses Element anhaengen
-	 * @param pXML XML String
+	 * @param xml XML String
 	 */
-	void append(String pXML);
+	void append(String xml);
 
 	/**
 	 * Alle direkten Kindelemente anhand Elementnamen loeschen
-	 * @param pElementName streng genommen XPath Anweisung fuer selectNodes
+	 * @param elementName streng genommen XPath Anweisung fuer selectNodes
 	 */
-	void removeChildren(String pElementName);
+	void removeChildren(String elementName);
 
 	/**
 	 * @param pBeforeIndex Index vor dem das neue Element eingefuegt werden soll
@@ -135,17 +135,17 @@ public interface XMLElement {
 	XMLElement insertBefore(int pBeforeIndex, String pNewElementName);
 
 	/**
-	 * @param pElementName Name des zu suchenden XML Elements
-	 * @param pStart Startindex ab 0
+	 * @param elementName Name des zu suchenden XML Elements
+	 * @param start Startindex ab 0
 	 * @return Index des Elementnamens oder -1 wenn nicht gefunden
 	 */
-	int indexByName(String pElementName, int pStart);
+	int indexByName(String elementName, int start);
 
 	/**
 	 * Attribut entfernen
-	 * @param pElementName
+	 * @param elementName
 	 */
-	void removeAttribute(String pElementName);
+	void removeAttribute(String elementName);
 	
 	/**
 	 * @return Anzahl der Kindelemente
@@ -158,10 +158,10 @@ public interface XMLElement {
 	boolean hasChildren();
 	
 	/**
-	 * @param pAttributname
+	 * @param attributname
 	 * @return true wenn Attribut existiert, sonst false
 	 */
-	boolean hasAttribute(String pAttributname);
+	boolean hasAttribute(String attributname);
 	
 	/**
 	 * Loescht leere Attribute
@@ -172,4 +172,10 @@ public interface XMLElement {
 	 * @param name neuer Elementname
 	 */
 	void setName(String name);
+	
+	/**
+	 * @param attributname
+	 * @param value
+	 */
+	void setValueIfNotNull(String attributname, String value);
 }
