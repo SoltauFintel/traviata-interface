@@ -122,9 +122,9 @@ public class XMLDocument implements Serializable {
 	public void loadFile(String pDateiname) {
 		SAXReader r = new SAXReader();
 		try {
-			dok = r.read(pDateiname);
+			dok = r.read("file:///" + pDateiname.replace("\\", "/"));
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Fehler beim Laden der Datei: " + pDateiname, e);
 		}
 	}
 	
