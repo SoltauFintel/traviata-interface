@@ -18,7 +18,9 @@ public class TbLine implements TbActionItem, Serializable {
 	}
 
 	public TbLine(XMLElement e) {
-		label = e.getValue("label");
+		if (e.hasAttribute("label")) {
+			label = e.getValue("label");
+		}
 		text = e.getText();
 	}
 
@@ -35,6 +37,9 @@ public class TbLine implements TbActionItem, Serializable {
 	}
 
 	public String getLabeld() {
+		if (label == null || label.trim().isEmpty()) {
+			return "";
+		}
 		return label.trim().endsWith(":") ? label : label + ":";
 	}
 

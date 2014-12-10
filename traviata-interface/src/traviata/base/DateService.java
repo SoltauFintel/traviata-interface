@@ -44,4 +44,11 @@ public class DateService {
 	public static String nowString() {
 		return new SimpleDateFormat("HH:mm:ss").format(new java.util.Date());
 	}
+	
+	public static String todayPlus(int days) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(new java.util.Date());
+		c.add(Calendar.DAY_OF_MONTH, days);
+		return date.format(c.getTime());
+	}
 }
