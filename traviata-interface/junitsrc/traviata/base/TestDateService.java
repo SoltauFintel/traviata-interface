@@ -10,13 +10,9 @@ public class TestDateService {
 		Assert.assertEquals(1420066243000l, DateService.toDate("31.12.2014 23:50:43").getTime());
 	}
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void toDate_fail() {
-		try {
-			DateService.toDate("Quatsch");
-			Assert.fail("RuntimeException expected");
-		} catch (RuntimeException ok) {
-		}
+		DateService.toDate("Quatsch");
 	}
 	
 	@Test
