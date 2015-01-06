@@ -11,6 +11,14 @@ import java.util.List;
 public interface Testapplication {
 
 	/**
+	 * Call this method before you start Testcases. 
+	 * @param path test application execution folder
+	 * @param url URL of the to be tested test application
+	 * @param parameters more parameters for the test application: lines with key + "=" + value
+	 */
+	void init(String path, String url, String parameters);
+	
+	/**
 	 * @return test case compilation names
 	 */
 	List<String> getTestcaseCompilationNames();
