@@ -8,7 +8,7 @@ import traviata.testreport.TbTestcase;
 /**
  * Traviata test case
  */
-public interface I_Testcase {
+public interface Testcase {
 	/** INTERN */
 	int NORMAL_PRIORITY = 90;
 

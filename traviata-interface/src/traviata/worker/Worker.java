@@ -1,6 +1,6 @@
 package traviata.worker;
 
-public interface I_Worker {
+public interface Worker {
 
 	void before();
 	

@@ -13,7 +13,11 @@ public class DateService {
 	private static final DateFormat date = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.GERMANY);
 	private static final DateFormat date_time = DateFormat.getDateTimeInstance(
 			DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.GERMANY);
-	
+	/** yyyy-MM-dd */
+	public static final SimpleDateFormat C_DATE = new SimpleDateFormat("yyyy-MM-dd");
+	/** HH-mm */
+	public static final SimpleDateFormat C_TIME = new SimpleDateFormat("HH-mm");
+
 	private DateService() {
 	}
 	

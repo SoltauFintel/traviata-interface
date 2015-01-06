@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Traviata test application
  */
-public interface I_Testapplication {
+public interface Testapplication {
 
 	/**
 	 * @return test case compilation names
@@ -19,7 +19,7 @@ public interface I_Testapplication {
 	 * @param tcc test case compilation name
 	 * @return all test cases of test case compilation
 	 */
-	List<I_Testcase> getTestcases(String tcc);
+	List<Testcase> getTestcases(String tcc);
 	
 	/**
 	 * Cleans up resources after test run.

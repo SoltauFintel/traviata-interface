@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ThreadLocalWorker extends ThreadLocal<I_Worker> {
-	private final Class<? extends I_Worker> cls;
-	private final List<I_Worker> all = Collections.synchronizedList(new ArrayList<I_Worker>());
+public class ThreadLocalWorker extends ThreadLocal<Worker> {
+	private final Class<? extends Worker> cls;
+	private final List<Worker> all = Collections.synchronizedList(new ArrayList<Worker>());
 	
-	public ThreadLocalWorker(Class<? extends I_Worker> classOfWorker) {
+	public ThreadLocalWorker(Class<? extends Worker> classOfWorker) {
 		cls = classOfWorker;
 	}
 	
-	protected I_Worker initialValue() {
+	protected Worker initialValue() {
 		try {
-			I_Worker w = cls.newInstance();
+			Worker w = cls.newInstance();
 			all.add(w);
 			return w;
 		} catch (InstantiationException e) {
@@ -29,7 +29,7 @@ public class ThreadLocalWorker extends ThreadLocal<I_Worker> {
 	 */
 	@Override
 	public void remove() {
-		for (I_Worker w : all) {
+		for (Worker w : all) {
 			w.afterAll();
 		}
 		all.clear();
