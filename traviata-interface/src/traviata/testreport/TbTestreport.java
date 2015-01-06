@@ -13,6 +13,7 @@ import traviata.base.xml.XMLElement;
 public class TbTestreport implements Serializable {
 	private final List<TbTestcase> testcases = new ArrayList<TbTestcase>();
 	private final Map<String, String> parameters = new TreeMap<String, String>();
+	public static String lastTestcase_title = null;
 	private String version;
 
 	public TbTestreport() {
@@ -74,8 +75,25 @@ public class TbTestreport implements Serializable {
 		return first;
 	}
 	
+	public void add(TbTestcase testcase) {
+		testcases.add(testcase);
+	}
+	
 	public TbTestcase getLastTestcase() {
-		return testcases.get(testcases.size() - 1);
+		int size = testcases.size();
+		if (size == 0) {
+			if (lastTestcase_title == null) {
+				return null;
+			} else {
+				TbTestcase t = new TbTestcase();
+				t.setTitle(lastTestcase_title);
+				t.setClassification("");
+				t.setScriptname("");
+				add(t);
+				return t;
+			}
+		}
+		return testcases.get(size - 1);
 	}
 
 	public void addItem(TbActionItem item) {

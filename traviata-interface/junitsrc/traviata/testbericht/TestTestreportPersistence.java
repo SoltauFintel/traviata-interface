@@ -129,4 +129,17 @@ public class TestTestreportPersistence {
 		Assert.assertEquals("Failure!\n", stacktrace, em2.getText());
 		file.deleteOnExit();
 	}
+	
+	@Test
+	public void getLastTestcase() {
+		TbTestreport.lastTestcase_title = "Fehler";
+		TbTestreport tr = new TbTestreport();
+		TbTestcase t = tr.getLastTestcase();
+		Assert.assertNotNull("getLastTestcase darf nicht null liefern", t);
+		// Im Teil B noch testen, ob die (De)Serialisierung dann noch klappt:
+		XMLDocument doc = tr.getDoc();
+		XMLDocument doc2 = new XMLDocument(doc.getXML());
+		TbTestreport tr2 = new TbTestreport(doc2);
+		Assert.assertNotNull(tr2.getTestcases().get(0));
+	}
 }
