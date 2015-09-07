@@ -55,4 +55,24 @@ public class DateService {
 		c.add(Calendar.DAY_OF_MONTH, days);
 		return date.format(c.getTime());
 	}
+
+	/**
+	 * @param hours
+	 * @return java.util.Date hours ago
+	 */
+	public static java.util.Date hoursAgo(int hours) {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.HOUR, -hours);
+		return c.getTime();
+	}
+
+	/**
+	 * @param days
+	 * @return java.util.Date days ago
+	 */
+	public static java.util.Date daysAgo(int days) {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DAY_OF_YEAR, -days);
+		return c.getTime();
+	}
 }

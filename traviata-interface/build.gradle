@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-version = '0.4.0'
+version = '0.4.1-SNAPSHOT'
 group = 'com.github.traviatasoftware'
 archivesBaseName = 'traviata-interface'
 project.description = 'Public interface for Traviata test applications'
