@@ -27,10 +27,8 @@ dependencies {
 }
 
 // http://central.sonatype.org/pages/gradle.html
-apply plugin: 'maven'
-apply plugin: 'signing'
 
-task javadocJar(type: Jar) {
+/*task javadocJar(type: Jar) {
 	classifier = 'javadoc'
 	from javadoc
 }
@@ -44,72 +42,4 @@ artifacts {
 	archives javadocJar, sourcesJar
 }
 
-signing {
-	sign configurations.archives
-}
-
-uploadArchives {
-	repositories {
-		mavenDeployer {
-			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-				// gradle.properties in users/.gradle dir ! 
-				authentication(userName: ossrhUsername, password: ossrhPassword)
-			}
-			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-				authentication(userName: ossrhUsername, password: ossrhPassword)
-			}
-			pom.project {
-				name 'traviata-interface'
-				packaging 'jar'
-				description 'Public interface for Traviata test applications'
-				url 'https://github.com/traviatasoftware/traviata-interface/blob/master/README.md'
-				
-				scm {
-					connection 'https://github.com/traviatasoftware/traviata-interface'
-					developerConnection 'https://github.com/traviatasoftware/traviata-interface'
-					url 'https://github.com/traviatasoftware/traviata-interface'
-				}
-		  
-				licenses {
-					license {
-						name '(c) Marcus Warm'
-						url  'https://github.com/traviatasoftware/traviata-interface/blob/master/README.md'
-					}
-				}
-				
-				developers {
-					developer {
-						id 'traviatasoftware'
-						name  'Marcus Warm'
-						email 'juni@mwvb.de'
-					}
-				}
-			}
-		}
-	}
-}
-
-signArchives.onlyIf { project.hasProperty('mavenupload') }
-uploadArchives.onlyIf { project.hasProperty('mavenupload') }
-
-apply plugin: 'jacoco'
-
-jacoco {
-	toolVersion = '0.7.1.201405082137'
-}
-
-jacocoTestReport {
-	reports {
-		xml.enabled true
-		html.enabled true
-	}
-}
-
-test {
-	jacoco {
-		append = false
-		destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
-		classDumpFile = file("$buildDir/jacoco/classpathdumps")
-	}
-}
+*/

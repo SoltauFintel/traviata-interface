@@ -1,13 +1,14 @@
 <project name="traviata-interface" basedir="." default="build">
+	<!--
 	<property name="gradlebat" value="gradlew.bat"/>
+	-->
 
 	<target name="build">
-		<exec executable="${gradlebat}">
-			<arg value="build"/>
-		</exec>
+		<gradle task="build"/>
 	</target>
+	<!--
 	<target name="copy lib" depends="build">
-		<!-- man muss in build.gradle auskommentieren: von "signing {" bis Ende -->
+		<! man muss in build.gradle auskommentieren: von "signing {" bis Ende >
 		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT.jar" todir="C:\dat\lib"/>
 		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT-sources.jar" todir="C:\dat\lib"/>
 		<copy file="build/libs/traviata-interface-0.2.4-SNAPSHOT-javadoc.jar" todir="C:\dat\lib"/>
@@ -24,5 +25,14 @@
 			<arg value="-Pmavenupload"/>
 		</exec>
 	</target>
-	
+	-->
+	<macrodef name="gradle">
+		<attribute name="task"/>
+		<sequential>
+	        <exec executable="cmd" failonerror="true">
+	        	<arg line="/c gradlew.bat -g C:\jarcache\gradle @{task}"/>
+	        </exec>
+		</sequential>
+	</macrodef>
+
 </project>
